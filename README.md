@@ -1,3 +1,3 @@
 # trivapi
 
-A Trivia Questions API. Query me for trivia questions.
+Pronounced "Triv-Appy", a trivia API. Query me for multiple choice trivia questions.

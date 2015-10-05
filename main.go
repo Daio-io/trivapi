@@ -2,8 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-skeleton/app/utils"
-	"go-skeleton/app/controllers"
+	"trivapi/app/utils"
 )
 
 func main() {

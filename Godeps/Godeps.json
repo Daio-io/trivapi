@@ -1,0 +1,28 @@
+{
+	"ImportPath": "trivapi",
+	"GoVersion": "go1.5.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.0rc1-104-g1a7ab6e",
+			"Rev": "1a7ab6e4d5fdc72d6df30ef562102ae6e0d18518"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "c142f0f1baea5cef7f98a8a6c222f6134368c1f5"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "d67e0b7d1797975196499f79bcc322c08b9f218b"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "34ff4cd5e6de00702100a0ab3bb73de8de5ab35d"
+		},
+		{
+			"ImportPath": "gopkg.in/bluesuncorp/validator.v5",
+			"Comment": "v5.8.1",
+			"Rev": "27a1d3f1583676b710bb06faf4c8927dd941a893"
+		}
+	]
+}
