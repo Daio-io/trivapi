@@ -11,6 +11,6 @@ const (
 type Model struct {
 	Question   string   `json:"question"`
 	Answer     string   `json:"answer"`
-	Choices    []string `json:"choices"`
+	Options    []string `json:"options"`
 	Difficulty int      `json:"difficulty"`
 }
