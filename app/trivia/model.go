@@ -8,9 +8,10 @@ const (
 )
 
 // Model - Trivia model for trivia questions
-type Model struct {
+type triviaModel struct {
 	Question   string   `json:"question"`
 	Answer     string   `json:"answer"`
 	Options    []string `json:"options"`
+	Category  string   `json:"catergory"`
 	Difficulty int      `json:"difficulty"`
 }
