@@ -1,4 +1,4 @@
-package models
+package trivia
 
 // Difficulty consts
 const (
@@ -7,8 +7,8 @@ const (
 	HARD
 )
 
-// TriviaModel - Model for Triva Questions
-type TriviaModel struct {
+// Model - Trivia model for triva questions
+type Model struct {
 	Question   string
 	Answer     string
 	Choices    []string
