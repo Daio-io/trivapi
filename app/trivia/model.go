@@ -7,10 +7,10 @@ const (
 	HARD
 )
 
-// Model - Trivia model for triva questions
+// Model - Trivia model for trivia questions
 type Model struct {
-	Question   string
-	Answer     string
-	Choices    []string
-	Difficulty int
+	Question   string   `json:"question"`
+	Answer     string   `json:"answer"`
+	Choices    []string `json:"choices"`
+	Difficulty int      `json:"difficulty"`
 }
