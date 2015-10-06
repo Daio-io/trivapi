@@ -2,9 +2,7 @@ package db
 
 import "gopkg.in/mgo.v2"
 
-const (
-	connectionString = ""
-)
+var connectionString = getConnectionString()
 
 // Connect to database - returns a session
 func Connect() *mgo.Session {
