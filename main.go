@@ -11,6 +11,6 @@ func main() {
 	router.GET("/status", func(c *gin.Context) {
 		c.String(200, "OK")
 	})
-	router.GET("/trivia", trivia.GetRandomTrivia)
+	router.GET("/trivia/category/:category", trivia.GetTriviaForCategory)
 	router.Run(":" + utils.GetPort())
 }

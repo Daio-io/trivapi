@@ -1,21 +1,14 @@
 package trivia
 
-import (
-	"github.com/gin-gonic/gin"
-	"trivapi/db"
-)
+import "github.com/gin-gonic/gin"
 
-// GetRandomTrivia - Get a random question
-func GetRandomTrivia(c *gin.Context) {
-	session := db.Connect()
-	defer session.Close()
-
-	results := []triviaModel{}
-	col := session.DB("").C("trivia")
-	err := col.Find(nil).All(&results)
+// GetTriviaForCategory - Get all trivia for category
+func GetTriviaForCategory(c *gin.Context) {
+	category := c.Params.ByName("category")
+	results, err := GetAllTriviaForCategory(category)
 	if err != nil {
-		c.JSON(200, gin.H{"status": "not found"})
+		c.JSON(200, gin.H{"status": "not found", "response": results})
 	} else {
-		c.JSON(200, gin.H{"status": "success", "response": &results})
+		c.JSON(200, gin.H{"status": "success", "response": results})
 	}
 }
