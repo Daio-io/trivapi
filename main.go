@@ -9,7 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 	router.GET("/status", func(c *gin.Context) {
-		c.String(200, "OK")
+		c.JSON(200, gin.H{"status": "OK"})
 	})
 	router.GET("/trivia/category/:category", trivia.GetTriviaForCategory)
 	router.Run(":" + utils.GetPort())
