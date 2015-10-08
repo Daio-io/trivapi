@@ -7,11 +7,11 @@ import (
 
 // GetAllTriviaForCategory - Get all trivia for a category
 func GetAllTriviaForCategory(category string) (*[]triviaModel, error) {
-	session := db.Connect()
+	session := db.NewSession()
 	defer session.Close()
 
 	results := []triviaModel{}
-	col := session.DB("").C("trivia")
+	col := session.GetTriviaCollection()
 	err := col.Find(bson.M{"category": category}).All(&results)
 
 	return &results, err
