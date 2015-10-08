@@ -2,13 +2,21 @@ package db
 
 import "gopkg.in/mgo.v2"
 
-var connectionString = getConnectionString()
-var session, err = mgo.Dial(connectionString)
+var session *mgo.Session
 
-// Connect to database - returns a session
+// Connect to database - returns a copy of the sesssion
 func Connect() *mgo.Session {
-	if err != nil {
-		panic(err)
+	return getSession().Copy()
+}
+
+func getSession() *mgo.Session {
+	if session == nil {
+		var err error
+		session, err = mgo.Dial(getConnectionString())
+		if err != nil {
+			panic(err)
+		}
+		session.SetMode(mgo.Monotonic, true)
 	}
-	return session.Copy()
+	return session
 }
