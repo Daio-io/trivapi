@@ -11,6 +11,7 @@ func main() {
 	router.GET("/status", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "OK"})
 	})
+	router.GET("/trivia/", trivia.GetAllTrivia)
 	router.GET("/trivia/category/:category", trivia.GetTriviaForCategory)
 	router.Run(":" + utils.GetPort())
 }
