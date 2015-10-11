@@ -5,13 +5,13 @@ import (
 	"trivapi/db"
 )
 
-// Options - Search options
-type Options struct {
-	Limit int
+// QueryOptions - Search options
+type QueryOptions struct {
+	Amount int
 }
 
 // QueryTrivia - Get trivia with field query
-func QueryTrivia(options Options, params ...string) (*[]triviaModel, error) {
+func QueryTrivia(options QueryOptions, params ...string) (*[]triviaModel, error) {
 	session := db.NewSession()
 	defer session.Close()
 	results := []triviaModel{}
@@ -19,9 +19,9 @@ func QueryTrivia(options Options, params ...string) (*[]triviaModel, error) {
 
 	var err error
 	if params == nil {
-		err = col.Find(bson.M{}).Limit(options.Limit).All(&results)
+		err = col.Find(bson.M{}).Limit(options.Amount).All(&results)
 	} else {
-		err = col.Find(bson.M{params[0]: params[1]}).Limit(options.Limit).All(&results)
+		err = col.Find(bson.M{params[0]: params[1]}).Limit(options.Amount).All(&results)
 	}
 	return &results, err
 }

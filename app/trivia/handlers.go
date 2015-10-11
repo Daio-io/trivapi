@@ -5,11 +5,11 @@ import (
 	"strconv"
 )
 
-const defaultLimit = 20
+const defaultAmount = 20
 
 // GetTriviaForCategory - Get all trivia for category
 func GetTriviaForCategory(c *gin.Context) {
-	options := getOptions(c)
+	options := getQueryOptions(c)
 	category := c.Params.ByName("category")
 	results, err := QueryTrivia(options, "category", category)
 	returnResponse(c, results, err)
@@ -17,7 +17,7 @@ func GetTriviaForCategory(c *gin.Context) {
 
 // GetAllTrivia - Get all trivia
 func GetAllTrivia(c *gin.Context) {
-	options := getOptions(c)
+	options := getQueryOptions(c)
 	results, err := QueryTrivia(options)
 	returnResponse(c, results, err)
 }
@@ -30,11 +30,11 @@ func returnResponse(c *gin.Context, results *[]triviaModel, err error) {
 	}
 }
 
-func getOptions(c *gin.Context) Options {
-	limit, err := strconv.ParseInt(c.Query("limit"), 10, 0)
-	if err != nil {
-		limit = defaultLimit
+func getQueryOptions(c *gin.Context) QueryOptions {
+	amount, err := strconv.ParseInt(c.Query("amount"), 10, 0)
+	if err != nil || amount > defaultAmount {
+		amount = defaultAmount
 	}
-	options := Options{Limit: int(limit)}
+	options := QueryOptions{Amount: int(amount)}
 	return options
 }
