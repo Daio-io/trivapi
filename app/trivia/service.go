@@ -1,27 +1,24 @@
 package trivia
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"trivapi/db"
 )
 
+const collectionName = "trivia"
+
 // QueryOptions - Search options
 type QueryOptions struct {
-	Amount int
+	Amount  int
+	Filters map[string]string
 }
 
 // QueryTrivia - Get trivia with field query
-func QueryTrivia(options QueryOptions, params ...string) (*[]triviaModel, error) {
+func QueryTrivia(options QueryOptions) (*[]triviaModel, error) {
 	session := db.NewSession()
 	defer session.Close()
 	results := []triviaModel{}
-	col := session.GetTriviaCollection()
+	col := session.Collection(collectionName)
 
-	var err error
-	if params == nil {
-		err = col.Find(bson.M{}).Limit(options.Amount).All(&results)
-	} else {
-		err = col.Find(bson.M{params[0]: params[1]}).Limit(options.Amount).All(&results)
-	}
+	err := col.Find(options.Filters).Limit(options.Amount).All(&results)
 	return &results, err
 }

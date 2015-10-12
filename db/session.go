@@ -2,8 +2,6 @@ package db
 
 import "gopkg.in/mgo.v2"
 
-const collectionName = "trivia"
-
 // Session - Session Struct
 type Session struct {
 	session *mgo.Session
@@ -23,10 +21,10 @@ func (s *Session) Close() {
 	}
 }
 
-// GetTriviaCollection - get the collection
-func (s *Session) GetTriviaCollection() *mgo.Collection {
+// Collection - get the specified collection
+func (s *Session) Collection(collectionName string) *mgo.Collection {
 	if s.session != nil {
 		return s.session.DB("").C(collectionName)
 	}
-	panic("Attempt to get Trivia Collection when session is nil")
+	panic("Attempt to get Collection when session is nil")
 }

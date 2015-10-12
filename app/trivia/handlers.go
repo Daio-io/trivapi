@@ -5,13 +5,17 @@ import (
 	"strconv"
 )
 
-const defaultAmount = 20
+const (
+	defaultAmount = 20
+	cat           = "category"
+)
 
 // GetTriviaForCategory - Get all trivia for category
 func GetTriviaForCategory(c *gin.Context) {
 	options := getQueryOptions(c)
-	category := c.Params.ByName("category")
-	results, err := QueryTrivia(options, "category", category)
+	filters := map[string]string{cat: c.Params.ByName(cat)}
+	options.Filters = filters
+	results, err := QueryTrivia(options)
 	returnResponse(c, results, err)
 }
 
@@ -22,6 +26,7 @@ func GetAllTrivia(c *gin.Context) {
 	returnResponse(c, results, err)
 }
 
+// Private Helpers
 func returnResponse(c *gin.Context, results *[]triviaModel, err error) {
 	if err != nil {
 		c.JSON(200, gin.H{"status": "failed", "response": results})
