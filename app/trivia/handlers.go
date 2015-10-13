@@ -3,6 +3,7 @@ package trivia
 import (
 	"github.com/gin-gonic/gin"
 	"strconv"
+	"trivapi/db"
 )
 
 const (
@@ -27,7 +28,7 @@ func GetAllTrivia(c *gin.Context) {
 }
 
 // Private Helpers
-func returnResponse(c *gin.Context, results *[]triviaModel, err error) {
+func returnResponse(c *gin.Context, results interface{}, err error) {
 	if err != nil {
 		c.JSON(200, gin.H{"status": "failed", "response": results})
 	} else {
@@ -35,11 +36,11 @@ func returnResponse(c *gin.Context, results *[]triviaModel, err error) {
 	}
 }
 
-func getQueryOptions(c *gin.Context) QueryOptions {
+func getQueryOptions(c *gin.Context) db.QueryOptions {
 	amount, err := strconv.ParseInt(c.Query("amount"), 10, 0)
 	if err != nil || amount > defaultAmount {
 		amount = defaultAmount
 	}
-	options := QueryOptions{Amount: int(amount)}
+	options := db.QueryOptions{Amount: int(amount)}
 	return options
 }

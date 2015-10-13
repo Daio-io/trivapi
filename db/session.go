@@ -21,10 +21,15 @@ func (s *Session) Close() {
 	}
 }
 
-// Collection - get the specified collection
-func (s *Session) Collection(collectionName string) *mgo.Collection {
+// Collection - get the specified collection with model
+func (s *Session) Collection(collectionName string, model interface{}) *Collection {
 	if s.session != nil {
-		return s.session.DB("").C(collectionName)
+		mgoCol := s.session.DB("").C(collectionName)
+		c := new(Collection)
+		c.col = mgoCol
+		c.model = model
+		c.count, _ = mgoCol.Count()
+		return c
 	}
 	panic("Attempt to get Collection when session is nil")
 }

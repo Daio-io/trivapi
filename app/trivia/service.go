@@ -1,24 +1,18 @@
 package trivia
 
-import (
-	"trivapi/db"
-)
+import "trivapi/db"
 
 const collectionName = "trivia"
 
-// QueryOptions - Search options
-type QueryOptions struct {
-	Amount  int
-	Filters map[string]string
-}
+var collectionCount string
 
 // QueryTrivia - Get trivia with field query
-func QueryTrivia(options QueryOptions) (*[]triviaModel, error) {
+func QueryTrivia(options db.QueryOptions) (interface{}, error) {
 	session := db.NewSession()
 	defer session.Close()
-	results := []triviaModel{}
-	col := session.Collection(collectionName)
+	model := []triviaModel{}
+	col := session.Collection(collectionName, model)
 
-	err := col.Find(options.Filters).Limit(options.Amount).All(&results)
-	return &results, err
+	results, err := col.FindRandom(options)
+	return results, err
 }
