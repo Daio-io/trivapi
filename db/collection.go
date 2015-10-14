@@ -31,5 +31,8 @@ func (c *Collection) FindRandom(options QueryOptions) (interface{}, error) {
 }
 
 func (c *Collection) makeRandomSkip() int {
+	if c.count == 0 {
+		return 0
+	}
 	return rand.Intn(c.count)
 }
