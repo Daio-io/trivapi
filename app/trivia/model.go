@@ -13,5 +13,5 @@ type triviaModel struct {
 	Answer     string   `json:"answer"`
 	Options    []string `json:"options"`
 	Category   string   `json:"catergory"`
-	Difficulty int      `json:"difficulty"`
+	Difficulty string   `json:"difficulty"`
 }
