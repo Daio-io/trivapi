@@ -6,12 +6,6 @@ import (
 	"reflect"
 )
 
-// QueryOptions - Search options
-type QueryOptions struct {
-	Amount  int
-	Filters map[string]string
-}
-
 // Collection - Struct
 type Collection struct {
 	col   *mgo.Collection
@@ -23,7 +17,7 @@ type Collection struct {
 func (c *Collection) FindRandom(options QueryOptions) (interface{}, error) {
 	modelType := reflect.New(reflect.TypeOf(c.model))
 	skip := c.makeRandomSkip()
-	err := c.col.Find(options.Filters).Limit(options.Amount).Skip(skip).All(modelType.Interface())
+	err := c.col.Find(options.GetFilters()).Limit(options.Amount).Skip(skip).All(modelType.Interface())
 	if err != nil {
 		return nil, err
 	}

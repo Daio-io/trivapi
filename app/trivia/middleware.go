@@ -25,19 +25,11 @@ func getQueryOptions(c *gin.Context) db.QueryOptions {
 	if amount > defaultAmount {
 		amount = defaultAmount
 	}
-	filters := map[string]string{}
+	options := db.NewQuery()
+	options.Amount = int(amount)
 
-	filters = addFilter("category", c.Params.ByName("category"), filters)
-	filters = addFilter("difficulty", c.Query("difficulty"), filters)
+	options.AddFilter("category", c.Params.ByName("category"))
+	options.AddFilter("difficulty", c.Query("difficulty"))
 
-	options := db.QueryOptions{Amount: int(amount), Filters: filters}
 	return options
-}
-
-// Refactor into filter object with helpers
-func addFilter(filterName string, value string, filters map[string]string) map[string]string {
-	if value != "" {
-		filters[filterName] = value
-	}
-	return filters
 }
