@@ -10,7 +10,7 @@ const (
 	defaultAmount = 20
 )
 
-// ParseTriviaParams - Get all trivia for category
+// ParseTriviaParams - Query params parsing middleware
 func ParseTriviaParams() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		options := getQueryOptions(c)
