@@ -6,9 +6,7 @@ import (
 	"trivapi/db"
 )
 
-const (
-	defaultAmount = 20
-)
+const maxAmount = 20
 
 // ParseTriviaParams - Query params parsing middleware
 func ParseTriviaParams() gin.HandlerFunc {
@@ -22,8 +20,8 @@ func ParseTriviaParams() gin.HandlerFunc {
 func getQueryOptions(c *gin.Context) db.QueryOptions {
 
 	amount, _ := strconv.ParseInt(c.Query("amount"), 10, 0)
-	if amount > defaultAmount {
-		amount = defaultAmount
+	if amount > maxAmount {
+		amount = maxAmount
 	}
 	options := db.NewQuery()
 	options.Amount = int(amount)
