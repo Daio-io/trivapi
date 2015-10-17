@@ -12,8 +12,8 @@ func GetTriviaForCategory(c *gin.Context) {
 	returnResponse(c, results, err)
 }
 
-// GetAllTrivia - Get all trivia
-func GetAllTrivia(c *gin.Context) {
+// GetRandomTriviaSet - Get a Random Set of Trivia handler
+func GetRandomTriviaSet(c *gin.Context) {
 	options := c.MustGet("options").(db.QueryOptions)
 	results, err := QueryTrivia(options)
 	returnResponse(c, results, err)
