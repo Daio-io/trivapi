@@ -2,7 +2,6 @@ package db
 
 import (
 	"gopkg.in/mgo.v2"
-	"math/rand"
 	"reflect"
 )
 
@@ -13,20 +12,22 @@ type Collection struct {
 	count int
 }
 
-// FindRandom - Return random results list
-func (c *Collection) FindRandom(options QueryOptions) (interface{}, error) {
+// Find - Return queried results list
+func (c *Collection) Find(options QueryOptions) (interface{}, error) {
 	modelType := reflect.New(reflect.TypeOf(c.model))
-	skip := c.makeRandomSkip()
-	err := c.col.Find(options.GetFilters()).Limit(options.Amount).Skip(skip).All(modelType.Interface())
+	err := c.col.Find(options.GetFilters()).Limit(options.Amount).All(modelType.Interface())
 	if err != nil {
 		return nil, err
 	}
 	return modelType.Elem().Interface(), nil
 }
 
-func (c *Collection) makeRandomSkip() int {
-	if c.count == 0 {
-		return 1
+// All - Return all results
+func (c *Collection) All() (interface{}, error) {
+	modelType := reflect.New(reflect.TypeOf(c.model))
+	err := c.col.Find(nil).All(modelType.Interface())
+	if err != nil {
+		return nil, err
 	}
-	return rand.Intn(c.count)
+	return modelType.Elem().Interface(), nil
 }

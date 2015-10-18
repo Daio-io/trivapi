@@ -10,7 +10,6 @@ func QueryTrivia(options db.QueryOptions) (interface{}, error) {
 	defer session.Close()
 	model := []triviaModel{}
 	col := session.Collection(collectionName, model)
-
-	results, err := col.FindRandom(options)
+	results, err := col.Find(options)
 	return results, err
 }
