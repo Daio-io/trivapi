@@ -23,7 +23,7 @@ func Shuffle(questions []triviaModel) []triviaModel {
 // Filter - Filter results function
 func Filter(fn filterFunc, questions []triviaModel) []triviaModel {
 	outputArray := []triviaModel{}
-	for i := len(questions) - 1; i > 0; i-- {
+	for i := 0; i < len(questions); i++ {
 		if fn(questions[i]) {
 			outputArray = append(outputArray, questions[i])
 		}
