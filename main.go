@@ -12,7 +12,7 @@ func main() {
 	router.GET("/status", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "OK"})
 	})
-	router.GET("/randomise", trivia.GetRandomTriviaSet)
-	router.GET("/category/:category", trivia.GetTriviaForCategory)
+	router.GET("/randomise", trivia.GetTriviaSet)
+	router.GET("/category/:category", trivia.GetTriviaSet)
 	router.Run(":" + utils.GetPort())
 }

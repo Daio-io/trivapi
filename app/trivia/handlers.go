@@ -5,23 +5,16 @@ import (
 	"trivapi/db"
 )
 
-// GetTriviaForCategory - Get all trivia for category
-func GetTriviaForCategory(c *gin.Context) {
+// GetTriviaSet - Get a Random Set of Trivia handler
+func GetTriviaSet(c *gin.Context) {
 	options := c.MustGet("options").(db.QueryOptions)
-	results, err := QueryTrivia(options)
-	returnResponse(c, results, err)
-}
-
-// GetRandomTriviaSet - Get a Random Set of Trivia handler
-func GetRandomTriviaSet(c *gin.Context) {
-	options := c.MustGet("options").(db.QueryOptions)
-	results, err := QueryTrivia(options)
-	returnResponse(c, results, err)
+	results := RandomTrivia(options)
+	returnResponse(c, results)
 }
 
 // Private Helpers
-func returnResponse(c *gin.Context, results interface{}, err error) {
-	if err != nil {
+func returnResponse(c *gin.Context, results []triviaModel) {
+	if len(results) == 0 {
 		c.JSON(200, gin.H{"status": "failed", "response": results})
 	} else {
 		c.JSON(200, gin.H{"status": "success", "response": results})
