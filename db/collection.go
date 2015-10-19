@@ -9,7 +9,6 @@ import (
 type Collection struct {
 	col   *mgo.Collection
 	model interface{}
-	count int
 }
 
 // Find - Return queried results list

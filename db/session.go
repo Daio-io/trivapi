@@ -28,7 +28,6 @@ func (s *Session) Collection(collectionName string, model interface{}) *Collecti
 		c := new(Collection)
 		c.col = mgoCol
 		c.model = model
-		c.count, _ = mgoCol.Count()
 		return c
 	}
 	panic("Attempt to get Collection when session is nil")
