@@ -2,12 +2,6 @@ package trivia
 
 import "trivapi/db"
 
-const (
-	collectionName = "trivia"
-	catFilterKey   = "category"
-	diffFilterKey  = "difficulty"
-)
-
 // Temporary solution - todo: cache properly
 var cachedResults []triviaModel
 
@@ -33,8 +27,8 @@ func getCachedTrivia() []triviaModel {
 }
 
 func getFilterFunction(filters map[string]string) filterFunc {
-	cat := filters[catFilterKey]
-	diff := filters[diffFilterKey]
+	cat := filters[categoryFilter]
+	diff := filters[difficultyFilter]
 	return func(t triviaModel) bool {
 		if cat != "" && diff != "" {
 			return t.Category == cat && t.Difficulty == diff

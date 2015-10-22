@@ -7,7 +7,7 @@ import (
 
 // GetTriviaSet - Get a Random Set of Trivia handler
 func GetTriviaSet(c *gin.Context) {
-	options := c.MustGet("options").(db.QueryOptions)
+	options := c.MustGet(optionsKey).(db.QueryOptions)
 	results := RandomTrivia(options)
 	returnResponse(c, results)
 }
