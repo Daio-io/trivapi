@@ -4,12 +4,18 @@
 
 Pronounced "Triv-Appy", a trivia API. Query me for multiple choice trivia questions.
 
-Work In Progress. Deployed to Heroku to test:
+Work In Progress. Deployed to Heroku to test: (Questions results will be available soon)
 
 ## Request
 
     http://trivapi.herokuapp.com/randomise
     http://trivapi.herokuapp.com/category/science
+
+## Categories
+
+  science
+  maths
+  general
 
 ## Queries
 
