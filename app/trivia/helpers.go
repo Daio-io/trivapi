@@ -33,7 +33,8 @@ func Filter(fn filterFunc, questions []triviaModel) []triviaModel {
 
 // LimitArray - Splice size of array
 func LimitArray(questions []triviaModel, limit int) []triviaModel {
-	if len(questions) > 0 && limit <= len(questions) {
+	questionLen := len(questions)
+	if questionLen > 0 && limit <= questionLen {
 		return questions[0:limit]
 	}
 	return questions

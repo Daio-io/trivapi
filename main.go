@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"trivapi/app/config"
 	"trivapi/app/trivia"
-	"trivapi/app/utils"
 )
 
 func main() {
