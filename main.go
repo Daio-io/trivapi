@@ -9,12 +9,18 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.LoadHTMLGlob("app/templates/*")
+
+	// Middleware
 	router.Use(trivia.ParseTriviaParams())
+
+	// Website / Homepage
+	router.GET("/", home.GetHomepage)
+	router.LoadHTMLGlob("app/templates/*")
+
+	// API
 	router.GET("/status", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "OK"})
 	})
-	router.GET("/", home.GetHomepage)
 	router.GET("/randomise", trivia.GetTriviaSet)
 	router.GET("/category/:category", trivia.GetTriviaSet)
 	router.Run(":" + utils.GetPort())
