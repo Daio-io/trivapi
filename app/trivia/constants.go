@@ -2,7 +2,7 @@ package trivia
 
 const (
 	optionsKey       = "options"
-	collectionName   = "trivia"
+	collectionName   = "trivias"
 	categoryFilter   = "category"
 	difficultyFilter = "difficulty"
 	amountFilter     = "amount"
