@@ -20,7 +20,7 @@ func ParseTriviaParams() gin.HandlerFunc {
 func getQueryOptions(c *gin.Context) db.QueryOptions {
 
 	amount, _ := strconv.ParseInt(c.Query(amountFilter), 10, 0)
-	if amount > maxAmount || amount == 0 {
+	if amount > maxAmount || amount <= 0 {
 		amount = maxAmount
 	}
 	options := db.NewQuery()
